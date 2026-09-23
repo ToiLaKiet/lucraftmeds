@@ -4,9 +4,6 @@ LucraftMeds là dự án Retrieval-Augmented Generation (RAG), được tổ ch�
 hai phần độc lập: backend xử lý dữ liệu và truy vấn, cùng frontend phục vụ giao
 diện người dùng.
 
-> Dự án hiện đang ở giai đoạn khởi tạo cấu trúc. Các module, dependency và lệnh
-> chạy sẽ được bổ sung trong quá trình phát triển.
-
 ## Cấu trúc dự án
 
 ```text
