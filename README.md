@@ -1,4 +1,4 @@
-# lucraftMeds
+# Lucraft@lucraftmeds
 
 LucraftMeds là dự án Retrieval-Augmented Generation (RAG), được tổ chức thành
 hai phần độc lập: backend xử lý dữ liệu và truy vấn, cùng frontend phục vụ giao
