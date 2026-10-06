@@ -76,7 +76,6 @@ export default function Home() {
           {messages.length === 0 ? (
             <div className="mx-auto flex w-full max-w-5xl flex-1 flex-col justify-center px-5 py-10 sm:px-8 lg:py-14">
               <div className="mx-auto w-full max-w-3xl text-center">
-                <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-500 text-white shadow-xl shadow-blue-500/20"><Icon name="activity" className="h-8 w-8" /></div>
                 <div className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-[11px] font-semibold text-blue-700"><Icon name="sparkles" className="h-3.5 w-3.5" />AI hỗ trợ tra cứu y khoa</div>
                 <h2 className="text-balance text-2xl font-bold tracking-[-0.03em] text-slate-900 sm:text-3xl lg:text-[34px]">Xin chào, tôi có thể hỗ trợ gì cho bạn?</h2>
                 <p className="mx-auto mt-3 max-w-2xl text-sm leading-6 text-slate-500 sm:text-[15px]">Đặt câu hỏi về sức khỏe và nhận thông tin được tổng hợp từ các nguồn y khoa đáng tin cậy, kèm tài liệu tham khảo rõ ràng.</p>
