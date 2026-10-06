@@ -1,0 +1,175 @@
+{
+  "generated_at": "2026-10-06T10:19:46.961309+00:00",
+  "profile_version": "1.0",
+  "config": {
+    "sample_size_per_domain": 6,
+    "random_seed": 42,
+    "pattern_coverage_target": 0.95,
+    "max_patterns_per_domain": 2,
+    "requested_domains": [
+      "120ask.com",
+      "vinmec.com"
+    ]
+  },
+  "dataset_summary": {
+    "total_input_urls": 4394718,
+    "profiled_domain_count": 2,
+    "invalid_url_count": 0,
+    "sampled_url_count": 12,
+    "successful_url_count": 9
+  },
+  "domains": [
+    {
+      "domain": "120ask.com",
+      "total_urls": 918479,
+      "sampled_urls": 6,
+      "successful_samples": 3,
+      "fetch_success_rate": 0.5,
+      "has_multiple_templates": false,
+      "template_count": 1,
+      "profiled_url_count": 918479,
+      "unprofiled_url_count": 0,
+      "templates": [
+        {
+          "url_pattern": "/question/*.htm",
+          "url_count": 918479,
+          "domain_coverage": 1.0,
+          "sample_count": 6,
+          "successful_samples": 3,
+          "fetch_success_rate": 0.5,
+          "page_type": "medical_qa",
+          "classification_confidence": 0.48,
+          "classification_evidence": [
+            "URL contains Q&A keyword"
+          ],
+          "needs_review": true,
+          "title_selector": {
+            "selector": "h1",
+            "coverage": 0.667,
+            "example": "精神分裂症_有问必答_快速问医生"
+          },
+          "content_selector": {
+            "selector": null,
+            "coverage": 0.0,
+            "example": null
+          },
+          "author": {
+            "selector": null,
+            "coverage": 0.0,
+            "example": null
+          },
+          "date": {
+            "selector": null,
+            "coverage": 0.0,
+            "example": null
+          },
+          "has_pagination": false,
+          "pagination": {
+            "value": false,
+            "ratio": 0.0,
+            "confidence": 0.85,
+            "evidence": []
+          },
+          "js_rendered": false,
+          "js_render": {
+            "value": false,
+            "ratio": 0.0,
+            "confidence": 0.78,
+            "evidence": [
+              "No material DOM/content growth after render"
+            ]
+          },
+          "template_fingerprints": {
+            "medical_qa|title|no-content-selector": 1,
+            "medical_qa|h1|no-content-selector": 2
+          },
+          "sample_urls": [
+            "https://www.120ask.com/question/661912.htm",
+            "http://www.120ask.com/question/34557564.htm",
+            "http://www.120ask.com/question/62425755.htm",
+            "https://www.120ask.com/question/654571.htm",
+            "http://www.120ask.com/question/19015571.htm"
+          ]
+        }
+      ],
+      "errors": {
+        "timeout": 3
+      }
+    },
+    {
+      "domain": "vinmec.com",
+      "total_urls": 26129,
+      "sampled_urls": 6,
+      "successful_samples": 6,
+      "fetch_success_rate": 1.0,
+      "has_multiple_templates": false,
+      "template_count": 1,
+      "profiled_url_count": 26127,
+      "unprofiled_url_count": 2,
+      "templates": [
+        {
+          "url_pattern": "/vie/bai-viet/*",
+          "url_count": 26127,
+          "domain_coverage": 0.9999,
+          "sample_count": 6,
+          "successful_samples": 6,
+          "fetch_success_rate": 1.0,
+          "page_type": "medical_article",
+          "classification_confidence": 0.99,
+          "classification_evidence": [
+            "URL matches a strong medical-article pattern",
+            "substantial article-like content"
+          ],
+          "needs_review": false,
+          "title_selector": {
+            "selector": "main h1",
+            "coverage": 1.0,
+            "example": "Chữa viêm đại tràng có chữa khỏi được không?"
+          },
+          "content_selector": {
+            "selector": ".detail-content",
+            "coverage": 1.0,
+            "example": null
+          },
+          "author": {
+            "selector": "script[type=\"application/ld+json\"]::author",
+            "coverage": 1.0,
+            "example": "Lê Nguyễn Hồng Trâm"
+          },
+          "date": {
+            "selector": "script[type=\"application/ld+json\"]::datePublished",
+            "coverage": 1.0,
+            "example": "2024-07-08T03:14:37.000Z"
+          },
+          "has_pagination": false,
+          "pagination": {
+            "value": false,
+            "ratio": 0.0,
+            "confidence": 0.85,
+            "evidence": []
+          },
+          "js_rendered": false,
+          "js_render": {
+            "value": false,
+            "ratio": 0.0,
+            "confidence": 0.78,
+            "evidence": [
+              "No material DOM/content growth after render"
+            ]
+          },
+          "template_fingerprints": {
+            "medical_article|main h1|.detail-content": 6
+          },
+          "sample_urls": [
+            "https://www.vinmec.com/vie/bai-viet/chua-viem-dai-trang-co-chua-khoi-duoc-khong-vi",
+            "https://www.vinmec.com/vie/bai-viet/huong-dan-doc-phim-chup-x-quang-so-nao-o-tu-thang-va-nghieng-vi",
+            "https://www.vinmec.com/vie/bai-viet/mun-coc-o-tre-so-sinh-va-tre-em-vi",
+            "https://www.vinmec.com/vie/bai-viet/benh-thieu-mau-co-tim-cuc-bo-uong-thuoc-gi-vi",
+            "https://www.vinmec.com/vie/bai-viet/hoat-dong-luc-cach-du-phong-nhoi-mau-co-tim-can-thiet-vi"
+          ]
+        }
+      ],
+      "errors": {}
+    }
+  ]
+}
