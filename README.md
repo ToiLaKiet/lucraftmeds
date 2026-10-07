@@ -1,63 +1,58 @@
 # Lucraft@lucraftmeds
 
-LucraftMeds là dự án Retrieval-Augmented Generation (RAG), được tổ chức thành
-hai phần độc lập: backend xử lý dữ liệu và truy vấn, cùng frontend phục vụ giao
-diện người dùng.
+LucraftMeds is a Retrieval-Augmented Generation (RAG) project organized into two independent components: a backend for data processing and queries, and a frontend for the user interface.
 
-## Cấu trúc dự án
+## Project Structure
 
 ```text
 lucraftmeds/
-├── lucraftmeds@be/       # Backend và RAG pipeline
+├── lucraftmeds@be/       # Backend and RAG pipeline
 ├── lucraftmeds@fe/       # Frontend
 ├── .gitignore
 └── README.md
 ```
 
-Toàn bộ mã nguồn và tài nguyên của backend nằm trong `lucraftmeds@be/`. Vì vậy,
-các lệnh liên quan đến Python, indexing, API hoặc test cần được chạy từ thư mục
-này.
+All backend source code and resources reside in `lucraftmeds@be/`. Therefore, commands related to Python, indexing, APIs, or tests must be run from this directory.
 
 ### Backend
 
-| Đường dẫn | Vai trò |
+| Path | Purpose |
 | --- | --- |
-| `lucraftmeds@be/main.py` | Entry point của ứng dụng backend. |
-| `lucraftmeds@be/config.yaml` | Cấu hình model, chunking, index, database, cache và evaluation. |
-| `lucraftmeds@be/requirements.txt` | Danh sách dependency Python. |
-| `lucraftmeds@be/.env` | Biến môi trường và API key; không commit file này lên Git. |
-| `lucraftmeds@be/data/` | Tài liệu nguồn, dữ liệu đã xử lý và bộ dữ liệu đánh giá. |
-| `lucraftmeds@be/schemas/` | Các schema cho document, chunk và kết quả truy vấn. |
-| `lucraftmeds@be/ingestion/` | Connector và parser cho PDF, HTML, bảng, OCR và website. |
-| `lucraftmeds@be/chunking/` | Chiến lược chia nhỏ tài liệu và quản lý giới hạn token. |
-| `lucraftmeds@be/embeddings/` | Sinh embedding và quản lý phiên bản embedding model. |
-| `lucraftmeds@be/vectordb/` | Tích hợp và thao tác với vector database. |
-| `lucraftmeds@be/lexical/` | BM25 và keyword index cho hybrid search. |
-| `lucraftmeds@be/retrieval/` | Truy xuất hybrid, metadata filter và hợp nhất kết quả. |
-| `lucraftmeds@be/rerank/` | Rerank các kết quả truy xuất. |
-| `lucraftmeds@be/query/` | Query rewriting, routing, multi-query và HyDE. |
-| `lucraftmeds@be/cache/` | Exact cache và semantic cache. |
-| `lucraftmeds@be/prompts/` | Các prompt template có quản lý phiên bản. |
-| `lucraftmeds@be/generation/` | Sinh câu trả lời có căn cứ và trích dẫn nguồn. |
-| `lucraftmeds@be/api/` | Lớp API phục vụ indexing và truy vấn. |
-| `lucraftmeds@be/pipelines/` | Pipeline indexing offline và query online. |
-| `lucraftmeds@be/jobs/` | Các tác vụ indexing, reindexing và evaluation định kỳ. |
-| `lucraftmeds@be/eval/` | Đánh giá faithfulness, recall@k và chất lượng RAG. |
-| `lucraftmeds@be/observability/` | Trace, latency, chi phí và quality metrics. |
-| `lucraftmeds@be/security/` | Xác thực, phân quyền theo chunk và xử lý dữ liệu nhạy cảm. |
-| `lucraftmeds@be/tests/` | Unit test, integration test và retrieval regression test. |
-| `lucraftmeds@be/logs/` | Log phục vụ theo dõi và debug. |
-| `lucraftmeds@be/utils/` | Các tiện ích dùng chung. |
+| `lucraftmeds@be/main.py` | Backend application entry point. |
+| `lucraftmeds@be/config.yaml` | Configuration for models, chunking, indexes, databases, caching, and evaluation. |
+| `lucraftmeds@be/requirements.txt` | Python dependency list. |
+| `lucraftmeds@be/.env` | Environment variables and API keys; do not commit this file to Git. |
+| `lucraftmeds@be/data/` | Source documents, processed data, and evaluation datasets. |
+| `lucraftmeds@be/schemas/` | Schemas for documents, chunks, and query results. |
+| `lucraftmeds@be/ingestion/` | Connectors and parsers for PDFs, HTML, tables, OCR, and websites. |
+| `lucraftmeds@be/chunking/` | Document chunking strategies and token limit management. |
+| `lucraftmeds@be/embeddings/` | Embedding generation and embedding model version management. |
+| `lucraftmeds@be/vectordb/` | Vector database integration and operations. |
+| `lucraftmeds@be/lexical/` | BM25 and keyword indexes for hybrid search. |
+| `lucraftmeds@be/retrieval/` | Hybrid retrieval, metadata filtering, and result fusion. |
+| `lucraftmeds@be/rerank/` | Reranking of retrieved results. |
+| `lucraftmeds@be/query/` | Query rewriting, routing, multi-query, and HyDE. |
+| `lucraftmeds@be/cache/` | Exact and semantic caching. |
+| `lucraftmeds@be/prompts/` | Versioned prompt templates. |
+| `lucraftmeds@be/generation/` | Generation of grounded answers with source citations. |
+| `lucraftmeds@be/api/` | API layer for indexing and queries. |
+| `lucraftmeds@be/pipelines/` | Offline indexing and online query pipelines. |
+| `lucraftmeds@be/jobs/` | Scheduled indexing, reindexing, and evaluation jobs. |
+| `lucraftmeds@be/eval/` | Evaluation of faithfulness, recall@k, and RAG quality. |
+| `lucraftmeds@be/observability/` | Tracing, latency, cost, and quality metrics. |
+| `lucraftmeds@be/security/` | Authentication, chunk-level access control, and sensitive data handling. |
+| `lucraftmeds@be/tests/` | Unit tests, integration tests, and retrieval regression tests. |
+| `lucraftmeds@be/logs/` | Logs for monitoring and debugging. |
+| `lucraftmeds@be/utils/` | Shared utilities. |
 
 ### Frontend
 
-Mã nguồn giao diện được đặt trong `lucraftmeds@fe/` và được phát triển độc lập
-với backend.
+The user interface source code is located in `lucraftmeds@fe/` and is developed independently of the backend.
 
-## Luồng xử lý dự kiến
+## Planned Processing Flow
 
 ```text
-Tài liệu
+Documents
   -> Ingestion
   -> Chunking
   -> Embeddings + Lexical index
@@ -65,13 +60,12 @@ Tài liệu
   -> Retrieval
   -> Rerank
   -> Generation
-  -> Câu trả lời kèm nguồn tham chiếu
+  -> Answer with source references
 ```
 
-## Thiết lập backend
+## Backend Setup
 
-Di chuyển vào thư mục backend trước khi tạo môi trường hoặc chạy các lệnh
-Python:
+Navigate to the backend directory before creating the environment or running Python commands:
 
 ```bash
 cd lucraftmeds@be
@@ -80,16 +74,13 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Tạo `lucraftmeds@be/.env` trên máy local để lưu các biến môi trường cần thiết.
-Không đưa API key hoặc thông tin nhạy cảm vào mã nguồn.
+Create `lucraftmeds@be/.env` locally to store the required environment variables. Do not include API keys or sensitive information in the source code.
 
-Sau khi `main.py`, `requirements.txt` và `config.yaml` được hoàn thiện, backend
-sẽ được khởi động từ `lucraftmeds@be/`. Lệnh chạy cụ thể sẽ được cập nhật tại
-đây cùng với entry point của ứng dụng.
+Once `main.py`, `requirements.txt`, and `config.yaml` are finalized, the backend will be launched from `lucraftmeds@be/`. The specific startup command will be documented here alongside the application entry point.
 
-## Quy ước phát triển
+## Development Conventions
 
-- Chạy lệnh backend từ `lucraftmeds@be/`.
-- Đặt test trong `lucraftmeds@be/tests/`.
-- Không commit `.env`, log, dữ liệu nhạy cảm hoặc dữ liệu sinh ra khi chạy.
-- Cập nhật README khi bổ sung entry point, dependency hoặc dịch vụ hạ tầng mới.
+- Run backend commands from `lucraftmeds@be/`.
+- Place tests in `lucraftmeds@be/tests/`.
+- Do not commit `.env`, logs, sensitive data, or runtime-generated data.
+- Update the README when adding entry points, dependencies, or infrastructure services.

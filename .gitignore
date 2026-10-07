@@ -4,4 +4,5 @@
 data
 lucraftmeds@exp
 datasets
-
+*.jsonl
+*.json
