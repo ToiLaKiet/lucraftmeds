@@ -93,6 +93,53 @@ class ChunkDocumentsTests(unittest.TestCase):
                 breakpoint_threshold_type="unknown",  # type: ignore[arg-type]
             )
 
+        for kwargs in (
+            {"min_tokens": 0},
+            {"max_tokens": 0},
+            {"min_tokens": 4, "max_tokens": 3},
+        ):
+            with self.assertRaises(ValueError):
+                chunk_documents([], self.embeddings, **kwargs)
+
+    def test_max_tokens_splits_oversized_chunks(self):
+        chunks = chunk_documents(
+            [Document(page_content="one two three four five", metadata={})],
+            self.embeddings,
+            max_tokens=2,
+        )
+
+        self.assertEqual(
+            [chunk.page_content for chunk in chunks],
+            ["one two", "three four", "five"],
+        )
+        self.assertTrue(all(len(chunk.page_content.split()) <= 2 for chunk in chunks))
+        self.assertEqual([chunk.metadata["start_index"] for chunk in chunks], [0, 8, 19])
+
+    def test_min_tokens_merges_small_semantic_chunks(self):
+        chunks = chunk_documents(
+            [
+                Document(
+                    page_content="one two. three four. five six. seven eight.",
+                    metadata={},
+                )
+            ],
+            self.embeddings,
+            breakpoint_threshold_amount=50,
+            min_tokens=4,
+        )
+
+        self.assertTrue(all(len(chunk.page_content.split()) >= 4 for chunk in chunks))
+
+    def test_custom_token_counter_is_used(self):
+        chunks = chunk_documents(
+            [Document(page_content="aa bb cc", metadata={})],
+            self.embeddings,
+            max_tokens=4,
+            token_count=len,
+        )
+
+        self.assertEqual([chunk.page_content for chunk in chunks], ["aa", "bb", "cc"])
+
 
 if __name__ == "__main__":
     unittest.main()
