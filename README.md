@@ -1,71 +1,71 @@
-# Lucraft@lucraftmeds
+<div align="center">
 
-LucraftMeds is a Retrieval-Augmented Generation (RAG) project organized into two independent components: a backend for data processing and queries, and a frontend for the user interface.
+# LucraftMeds
 
-## Project Structure
+**A RAG-powered AI chatbot system serving accurate medical consultant demands.**
+
+LucraftMeds turns trusted medical sources into searchable knowledge and delivers
+grounded answers with relevant context, helping users find reliable health
+information quickly and clearly.
+
+<br/>
+
+![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=for-the-badge&logo=langchain&logoColor=white)
+![Qdrant](https://img.shields.io/badge/Qdrant-DC244C?style=for-the-badge&logo=qdrant&logoColor=white)
+![Next.js](https://img.shields.io/badge/Next.js%2016-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
+![React](https://img.shields.io/badge/React%2019-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+
+</div>
+
+---
+
+<!--
+## System Architecture
+
+TODO: Add the system architecture diagram and explanation.
+-->
+
+## Directory Structure
 
 ```text
 lucraftmeds/
-├── lucraftmeds@be/       # Backend and RAG pipeline
-├── lucraftmeds@fe/       # Frontend
-├── .gitignore
-└── README.md
+├── lucraftmeds@be/                         # Medical knowledge backend
+│   ├── api/                                # Exposes backend capabilities to clients
+│   │   └── fastapi.py                      # HTTP API application
+│   ├── chunking/                           # Prepares medical content for retrieval
+│   │   └── chunking.py                     # Semantic splitting and token limits
+│   ├── tests/                              # Validates backend data-processing behavior
+│   │   └── test_chunking.py                # Semantic chunking tests
+│   ├── config.yaml                         # Models and service configuration
+│   ├── main.py                             # Backend application entry point
+│   └── requirements.txt                    # Backend Python dependencies
+├── lucraftmeds@fe/
+│   └── fe/                                 # User-facing medical search application
+│       ├── app/                            # Pages, layouts, and global presentation
+│       ├── public/                         # Public images and static resources
+│       └── package.json                    # Frontend dependencies and run commands
+├── lucraftmeds@notebooks/                  # Medical knowledge preparation workspace
+│   ├── crawl4ai-dataset-creation/          # Collects source content from websites
+│   │   ├── crawl4ai-html-to-md.ipynb       # Converts web pages into Markdown datasets
+│   │   └── drives-merge.ipynb              # Combines collected dataset files
+│   ├── domains-analyzation/                # Reviews coverage and quality by source domain
+│   │   └── domains-analysis.ipynb           # Analyzes collected medical domains
+│   ├── chunkings/                          # Converts cleaned content into retrievable units
+│   │   └── bgem3-semantic-chunking.ipynb   # Chunks, embeds, and uploads data to Qdrant
+│   └── preprocessing.ipynb                 # Cleans and standardizes collected content
+└── README.md                               # Setup and project usage guide
 ```
 
-All backend source code and resources reside in `lucraftmeds@be/`. Therefore, commands related to Python, indexing, APIs, or tests must be run from this directory.
+## Requirements
 
-### Backend
+- Python `3.10+`
+- Node.js `20+` and npm
+- JupyterLab or Jupyter Notebook
+- Qdrant for vector storage
 
-| Path | Purpose |
-| --- | --- |
-| `lucraftmeds@be/main.py` | Backend application entry point. |
-| `lucraftmeds@be/config.yaml` | Configuration for models, chunking, indexes, databases, caching, and evaluation. |
-| `lucraftmeds@be/requirements.txt` | Python dependency list. |
-| `lucraftmeds@be/.env` | Environment variables and API keys; do not commit this file to Git. |
-| `lucraftmeds@be/data/` | Source documents, processed data, and evaluation datasets. |
-| `lucraftmeds@be/schemas/` | Schemas for documents, chunks, and query results. |
-| `lucraftmeds@be/ingestion/` | Connectors and parsers for PDFs, HTML, tables, OCR, and websites. |
-| `lucraftmeds@be/chunking/` | Document chunking strategies and token limit management. |
-| `lucraftmeds@be/embeddings/` | Embedding generation and embedding model version management. |
-| `lucraftmeds@be/vectordb/` | Vector database integration and operations. |
-| `lucraftmeds@be/lexical/` | BM25 and keyword indexes for hybrid search. |
-| `lucraftmeds@be/retrieval/` | Hybrid retrieval, metadata filtering, and result fusion. |
-| `lucraftmeds@be/rerank/` | Reranking of retrieved results. |
-| `lucraftmeds@be/query/` | Query rewriting, routing, multi-query, and HyDE. |
-| `lucraftmeds@be/cache/` | Exact and semantic caching. |
-| `lucraftmeds@be/prompts/` | Versioned prompt templates. |
-| `lucraftmeds@be/generation/` | Generation of grounded answers with source citations. |
-| `lucraftmeds@be/api/` | API layer for indexing and queries. |
-| `lucraftmeds@be/pipelines/` | Offline indexing and online query pipelines. |
-| `lucraftmeds@be/jobs/` | Scheduled indexing, reindexing, and evaluation jobs. |
-| `lucraftmeds@be/eval/` | Evaluation of faithfulness, recall@k, and RAG quality. |
-| `lucraftmeds@be/observability/` | Tracing, latency, cost, and quality metrics. |
-| `lucraftmeds@be/security/` | Authentication, chunk-level access control, and sensitive data handling. |
-| `lucraftmeds@be/tests/` | Unit tests, integration tests, and retrieval regression tests. |
-| `lucraftmeds@be/logs/` | Logs for monitoring and debugging. |
-| `lucraftmeds@be/utils/` | Shared utilities. |
-
-### Frontend
-
-The user interface source code is located in `lucraftmeds@fe/` and is developed independently of the backend.
-
-## Planned Processing Flow
-
-```text
-Documents
-  -> Ingestion
-  -> Chunking
-  -> Embeddings + Lexical index
-  -> Vector database
-  -> Retrieval
-  -> Rerank
-  -> Generation
-  -> Answer with source references
-```
-
-## Backend Setup
-
-Navigate to the backend directory before creating the environment or running Python commands:
+## Run the Backend
 
 ```bash
 cd lucraftmeds@be
@@ -74,21 +74,22 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Create `lucraftmeds@be/.env` locally to store the required environment variables. Do not include API keys or sensitive information in the source code.
+Create `lucraftmeds@be/.env` and add the required local environment variables.
+The backend start command will be added when the API entry point is finalized.
 
-Once `main.py`, `requirements.txt`, and `config.yaml` are finalized, the backend will be launched from `lucraftmeds@be/`. The specific startup command will be documented here alongside the application entry point.
+## Run the Frontend
 
-## Development Conventions
+```bash
+cd lucraftmeds@fe/fe
+npm install
+npm run dev
+```
 
-- Run backend commands from `lucraftmeds@be/`.
-- Place tests in `lucraftmeds@be/tests/`.
-- Do not commit `.env`, logs, sensitive data, or runtime-generated data.
-- Update the README when adding entry points, dependencies, or infrastructure services.
+Open [http://localhost:3000](http://localhost:3000).
 
-## Semantic chunking notebook
+For a production build:
 
-Open `lucraftmeds@notebooks/chunkings/bgem3-semantic-chunking.ipynb` and run its cells in order. The installation cell adds the notebook dependencies to the active kernel. Place UTF-8 CSV files in `To read Data/` at the repository root, or change `DATA_DIR`. For CSV input, set `TEXT_COLUMN` to the preprocessed text column; other columns are preserved as metadata.
-
-The notebook reuses `lucraftmeds@be/chunking/chunking.py`, generates BGE-M3 dense embeddings, and uploads chunks in batches to Qdrant. Set `QDRANT_URL` (default `http://localhost:6333`), `QDRANT_API_KEY` when required, and optionally `QDRANT_COLLECTION` (default `lucraftmeds_bge_m3`) in the kernel environment. Start your Qdrant server before ingestion. Missing or empty input folders skip ingestion.
-
-Unchanged input does not create duplicate points. Edits and deletions can leave older vectors; use a new collection for a clean rebuild. Existing collections are never deleted automatically.
+```bash
+npm run build
+npm run start
+```
