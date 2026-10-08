@@ -2,7 +2,11 @@
 
 # LucraftMeds
 
-**A medical Retrieval-Augmented Generation platform.**
+**A RAG-powered AI chatbot system serving accurate medical consultant demands.**
+
+LucraftMeds turns trusted medical sources into searchable knowledge and delivers
+grounded answers with relevant context, helping users find reliable health
+information quickly and clearly.
 
 <br/>
 
@@ -27,24 +31,31 @@ TODO: Add the system architecture diagram and explanation.
 
 ```text
 lucraftmeds/
-├── lucraftmeds@be/
-│   ├── api/
-│   ├── chunking/
-│   ├── tests/
-│   ├── config.yaml
-│   ├── main.py
-│   └── requirements.txt
+├── lucraftmeds@be/                         # Medical knowledge backend
+│   ├── api/                                # Exposes backend capabilities to clients
+│   │   └── fastapi.py                      # HTTP API application
+│   ├── chunking/                           # Prepares medical content for retrieval
+│   │   └── chunking.py                     # Semantic splitting and token limits
+│   ├── tests/                              # Validates backend data-processing behavior
+│   │   └── test_chunking.py                # Semantic chunking tests
+│   ├── config.yaml                         # Models and service configuration
+│   ├── main.py                             # Backend application entry point
+│   └── requirements.txt                    # Backend Python dependencies
 ├── lucraftmeds@fe/
-│   └── fe/
-│       ├── app/
-│       ├── public/
-│       └── package.json
-├── lucraftmeds@notebooks/
-│   ├── chunkings/
-│   ├── crawl4ai-dataset-creation/
-│   ├── domains-analyzation/
-│   └── preprocessing.ipynb
-└── README.md
+│   └── fe/                                 # User-facing medical search application
+│       ├── app/                            # Pages, layouts, and global presentation
+│       ├── public/                         # Public images and static resources
+│       └── package.json                    # Frontend dependencies and run commands
+├── lucraftmeds@notebooks/                  # Medical knowledge preparation workspace
+│   ├── crawl4ai-dataset-creation/          # Collects source content from websites
+│   │   ├── crawl4ai-html-to-md.ipynb       # Converts web pages into Markdown datasets
+│   │   └── drives-merge.ipynb              # Combines collected dataset files
+│   ├── domains-analyzation/                # Reviews coverage and quality by source domain
+│   │   └── domains-analysis.ipynb           # Analyzes collected medical domains
+│   ├── chunkings/                          # Converts cleaned content into retrievable units
+│   │   └── bgem3-semantic-chunking.ipynb   # Chunks, embeds, and uploads data to Qdrant
+│   └── preprocessing.ipynb                 # Cleans and standardizes collected content
+└── README.md                               # Setup and project usage guide
 ```
 
 ## Requirements
