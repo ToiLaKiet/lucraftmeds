@@ -84,3 +84,11 @@ Once `main.py`, `requirements.txt`, and `config.yaml` are finalized, the backend
 - Place tests in `lucraftmeds@be/tests/`.
 - Do not commit `.env`, logs, sensitive data, or runtime-generated data.
 - Update the README when adding entry points, dependencies, or infrastructure services.
+
+## Semantic chunking notebook
+
+Open `lucraftmeds@notebooks/chunkings/bgem3-semantic-chunking.ipynb` and run its cells in order. The installation cell adds the notebook dependencies to the active kernel. Place UTF-8 CSV files in `To read Data/` at the repository root, or change `DATA_DIR`. For CSV input, set `TEXT_COLUMN` to the preprocessed text column; other columns are preserved as metadata.
+
+The notebook reuses `lucraftmeds@be/chunking/chunking.py`, generates BGE-M3 dense embeddings, and uploads chunks in batches to Qdrant. Set `QDRANT_URL` (default `http://localhost:6333`), `QDRANT_API_KEY` when required, and optionally `QDRANT_COLLECTION` (default `lucraftmeds_bge_m3`) in the kernel environment. Start your Qdrant server before ingestion. Missing or empty input folders skip ingestion.
+
+Unchanged input does not create duplicate points. Edits and deletions can leave older vectors; use a new collection for a clean rebuild. Existing collections are never deleted automatically.
