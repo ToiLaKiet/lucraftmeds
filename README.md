@@ -10,7 +10,7 @@ information quickly and clearly.
 
 <br/>
 
-![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.12+-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=for-the-badge&logo=langchain&logoColor=white)
 ![Qdrant](https://img.shields.io/badge/Qdrant-DC244C?style=for-the-badge&logo=qdrant&logoColor=white)
 ![Next.js](https://img.shields.io/badge/Next.js%2016-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
@@ -31,17 +31,22 @@ TODO: Add the system architecture diagram and explanation.
 
 ```text
 lucraftmeds/
-├── lucraftmeds@be/                         # Medical knowledge backend
+├── backend/                                # Medical knowledge backend
 │   ├── api/                                # Exposes backend capabilities to clients
 │   │   └── fastapi.py                      # HTTP API application
 │   ├── chunking/                           # Prepares medical content for retrieval
 │   │   └── chunking.py                     # Semantic splitting and token limits
+│   ├── generation/                         # RAG answer-generation design
+│   │   └── readme.md                       # Streaming generation flow
 │   ├── tests/                              # Validates backend data-processing behavior
 │   │   └── test_chunking.py                # Semantic chunking tests
+│   ├── .python-version                     # Python version used by uv
 │   ├── config.yaml                         # Models and service configuration
 │   ├── main.py                             # Backend application entry point
-│   └── requirements.txt                    # Backend Python dependencies
-├── lucraftmeds@fe/
+│   ├── pyproject.toml                      # Project and dependency declarations
+│   ├── uv.lock                             # Reproducible dependency lockfile
+│   └── README.md                           # Backend setup and testing guide
+├── frontend/
 │   └── fe/                                 # User-facing medical search application
 │       ├── app/                            # Pages, layouts, and global presentation
 │       ├── public/                         # Public images and static resources
@@ -60,7 +65,8 @@ lucraftmeds/
 
 ## Requirements
 
-- Python `3.10+`
+- [uv](https://docs.astral.sh/uv/) for Python and backend dependency management
+- Python `3.12+` (uv installs it automatically when needed)
 - Node.js `20+` and npm
 - JupyterLab or Jupyter Notebook
 - Qdrant for vector storage
@@ -68,19 +74,25 @@ lucraftmeds/
 ## Run the Backend
 
 ```bash
-cd lucraftmeds@be
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
+cd backend
+uv sync
 ```
 
-Create `lucraftmeds@be/.env` and add the required local environment variables.
-The backend start command will be added when the API entry point is finalized.
+`uv sync` reads `pyproject.toml` and `uv.lock`, installs the required Python
+version when necessary, and creates an isolated environment at `backend/.venv`.
+Activating the environment manually is not required; use `uv run` for backend
+commands.
+
+Create `backend/.env` and add the required local environment variables. The
+backend start command will be added when the API entry point is finalized.
+
+See [`backend/README.md`](backend/README.md) for backend development and testing
+instructions.
 
 ## Run the Frontend
 
 ```bash
-cd lucraftmeds@fe/fe
+cd frontend/fe
 npm install
 npm run dev
 ```
