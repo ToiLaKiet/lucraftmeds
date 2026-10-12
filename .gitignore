@@ -6,3 +6,4 @@ lucraftmeds@exp
 datasets
 *.jsonl
 *.json
+*.csv
